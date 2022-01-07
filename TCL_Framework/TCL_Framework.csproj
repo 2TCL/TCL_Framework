@@ -51,6 +51,11 @@
     <Compile Include="Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
     <Compile Include="Enums\DataType.cs" />
+    <Compile Include="Interfaces\IGroupable.cs" />
+    <Compile Include="Interfaces\IHaveOrRunable.cs" />
+    <Compile Include="Interfaces\IRunable.cs" />
+    <Compile Include="Interfaces\IWhereable.cs" />
+    <Compile Include="Interfaces\TCLRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
