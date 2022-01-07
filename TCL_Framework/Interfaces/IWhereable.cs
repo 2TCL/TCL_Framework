@@ -2,7 +2,7 @@
 {
     public interface IWhereable<T> where T:new ()
     {
-    //    IHaveOrRunable<T> Where(string condition);
-    //    IHaveOrRunable<T> AllRow();
+        IHaveOrRunable<T> Where(string condition);
+        IHaveOrRunable<T> AllRow();
     }
 }
