@@ -2,3 +2,8 @@
 /TCL_Framework/bin
 /TCL_Framework/obj
 /TCL_Framework/packages
+/TCL_Framework/System.*
+/TCL_Framework/Microsoft.*
+/TCL_Framework/Npgsql.6.0.2
+/TCL_Framework/NuGet.CommandLine.6.0.0
+/TCL_Framework/System.*
