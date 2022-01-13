@@ -9,7 +9,7 @@ namespace TCL_Framework.Interfaces
     public interface TCLQuery
     {
         List<T> ExecuteQuery<T>() where T : new();
-        List<T> ExecuteQueryWithOutRelationship<T>() where T : new();
+        List<T> ExecuteQueryNoRelationship<T>() where T : new();
         int ExecuteNonQuery();
     }
 }

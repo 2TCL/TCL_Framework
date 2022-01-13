@@ -70,7 +70,7 @@ namespace TCL_Framework.TCLPostgreSQL
                                 string query = string.Format("SELECT * FROM {0} WHERE {1}", tableName, whereStr);
 
                                 cnn.Open();
-                                MethodInfo method = cnn.GetType().GetMethod("ExecuteQueryWithOutRelationship")
+                                MethodInfo method = cnn.GetType().GetMethod("ExecuteQueryNoRelationship")
                                 .MakeGenericMethod(new Type[] { itemType });
                                 property.SetValue(obj, method.Invoke(cnn, new object[] { query }));
                                 cnn.Close();
@@ -151,7 +151,7 @@ namespace TCL_Framework.TCLPostgreSQL
                             string query = string.Format("SELECT * FROM {0} WHERE {1}", tableName, whereStr);
 
                             cnn.Open();
-                            MethodInfo method = cnn.GetType().GetMethod("ExecuteQueryWithOutRelationship")
+                            MethodInfo method = cnn.GetType().GetMethod("ExecuteQueryNoRelationship")
                             .MakeGenericMethod(new Type[] { type });
                             var ienumerable = (IEnumerable)method.Invoke(cnn, new object[] { query });
                             cnn.Close();

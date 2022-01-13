@@ -47,7 +47,7 @@ namespace TCL_Framework.TCLPostgreSQL
             return list;
         }
 
-        public List<T> ExecuteQueryWithOutRelationship<T>() where T : new()
+        public List<T> ExecuteQueryNoRelationship<T>() where T : new()
         {
             command.CommandText = query;
 

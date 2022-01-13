@@ -13,7 +13,7 @@ namespace TCL_Framework.Abstractions
         public abstract int Update<T>(T obj) where T : new();
         public abstract int Delete<T>(T obj) where T : new();
         public abstract List<T> ExecuteQuery<T>(string query) where T : new();
-        public abstract List<T> ExecuteQueryWithOutRelationship<T>(string query) where T : new();
+        public abstract List<T> ExecuteQueryNoRelationship<T>(string query) where T : new();
         public abstract int ExecuteNonQuery(string query);
     }
 }

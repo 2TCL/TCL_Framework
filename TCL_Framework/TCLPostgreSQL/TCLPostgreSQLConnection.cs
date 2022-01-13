@@ -78,10 +78,10 @@ namespace TCL_Framework.TCLPostgreSQL
             return newQuery.ExecuteQuery<T>();
         }
 
-        public override List<T> ExecuteQueryWithOutRelationship<T>(string query)
+        public override List<T> ExecuteQueryNoRelationship<T>(string query)
         {
             TCLPostgreSQLQuery newQuery = new TCLPostgreSQLQuery(query, connectionString);
-            return newQuery.ExecuteQueryWithOutRelationship<T>();
+            return newQuery.ExecuteQueryNoRelationship<T>();
         }
 
         public override int ExecuteNonQuery(string query)
