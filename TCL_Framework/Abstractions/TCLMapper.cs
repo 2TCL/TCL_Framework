@@ -150,17 +150,17 @@ namespace TCL_Framework.Interfaces
                 return null;
         }
 
-        public ColumnAttribute GetColumn(string name, Dictionary<ColumnAttribute, object> listColumValues)
+        public ColumnAttribute GetColumn(string name, Dictionary<ColumnAttribute, object> listColumnValues)
         {
-            foreach (ColumnAttribute column in listColumValues.Keys)
+            foreach (ColumnAttribute column in listColumnValues.Keys)
                 if (column.Name == name)
                     return column;
             return null;
         }
 
-        public ColumnAttribute GetColumn(string name, List<ColumnAttribute> listColumAttributes)
+        public ColumnAttribute GetColumn(string name, List<ColumnAttribute> listColumnAttributes)
         {
-            foreach (ColumnAttribute column in listColumAttributes)
+            foreach (ColumnAttribute column in listColumnAttributes)
                 if (column.Name == name)
                     return column;
             return null;
