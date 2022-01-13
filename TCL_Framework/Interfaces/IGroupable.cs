@@ -2,6 +2,6 @@
 {
     public interface IGroupable<T> where T: new()
     {
-        IRunable<T> GroupBy(string collumnName);
+        IRunable<T> GroupBy(string columnNames);
     }
 }

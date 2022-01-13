@@ -108,13 +108,17 @@
     <Compile Include="Interfaces\IGroupable.cs" />
     <Compile Include="Interfaces\IHaveOrRunable.cs" />
     <Compile Include="Interfaces\IRunable.cs" />
-    <Compile Include="Interfaces\IWhereable.cs" />
+    <Compile Include="Interfaces\IWherable.cs" />
     <Compile Include="Abstractions\TCLMapper.cs" />
-    <Compile Include="Interfaces\TCLRepository.cs" />
+    <Compile Include="Interfaces\TCLQuery.cs" />
     <Compile Include="TCLPostgreSQL\TCLPostgreSQLConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TCLPostgreSQL\TCLPostgreSQLDeleteQuery.cs" />
+    <Compile Include="TCLPostgreSQL\TCLPostgreSQLInsertQuery.cs" />
     <Compile Include="TCLPostgreSQL\TCLPostgreSQLMapper.cs" />
     <Compile Include="TCLPostgreSQL\TCLPostgreSQLQuery.cs" />
+    <Compile Include="TCLPostgreSQL\TCLPostgreSQLSelectQuery.cs" />
+    <Compile Include="TCLPostgreSQL\TCLPostgreSQLUpdateQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -6,95 +6,72 @@ using System.Data;
 
 namespace TCL_Framework.TCLPostgreSQL
 {
-    public class TCLPostgreSQLQuery : TCLRepository
+    public class TCLPostgreSQLQuery : TCLQuery
     {
         protected string connectionString;
         protected NpgsqlCommand command;
         protected string query;
 
-        public TCLPostgreSQLQuery(string _query, TCLPostgreSQLConnection _connection)
+        public TCLPostgreSQLQuery(string query, string connectionString)
         {
-            query = _query;
+            this.connectionString = connectionString;
+            this.query = query;
             command = new NpgsqlCommand();
             command.Connection = TCLPostgreSQLConnection.GetInstance(connectionString).GetConnection();
         }
-        public TCLPostgreSQLQuery(TCLPostgreSQLConnection _connection)
+        public TCLPostgreSQLQuery(string connectionString)
         {
+            this.connectionString = connectionString;
             command = new NpgsqlCommand();
             command.Connection = TCLPostgreSQLConnection.GetInstance(connectionString).GetConnection();
         }
-        public IWhereable<T> Select<T>(T obj) where T : new()
+
+        public List<T> ExecuteQuery<T>() where T : new()
         {
-            throw new NotImplementedException();
+            command.CommandText = query;
+
+            DataTable dataTable = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            List<T> list = new List<T>();
+            TCLPostgreSQLConnection connection = TCLPostgreSQLConnection.GetInstance(connectionString);
+
+            TCLPostgreSQLMapper mapper = new TCLPostgreSQLMapper();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                list.Add(mapper.RelationshipMapping<T>(connection, dataRow));
+            }
+
+            return list;
         }
 
-        public T Update<T>(T obj) where T : new()
+        public List<T> ExecuteQueryWithOutRelationship<T>() where T : new()
         {
-            throw new NotImplementedException();
+            command.CommandText = query;
+
+            DataTable dataTable = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            List<T> list = new List<T>();
+            TCLPostgreSQLConnection connection = TCLPostgreSQLConnection.GetInstance(connectionString);
+
+            TCLPostgreSQLMapper mapper = new TCLPostgreSQLMapper();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                list.Add(mapper.NoRelationshipMapping<T>(connection, dataRow));
+            }
+
+            return list;
         }
 
-        public T Insert<T>(T obj) where T : new()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete<T>(T obj) where T : new()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ExecuteNonQuery(string query)
+        public int ExecuteNonQuery()
         {
             command.CommandText = query;
             return command.ExecuteNonQuery();
         }
-
-        public List<T> ExecuteQuery<T>(string query) where T : new()
-        {
-            command.CommandText = query;
-
-            DataTable dataTable = new DataTable();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            adapter.Fill(dataTable);
-
-            List<T> list = new List<T>();
-            TCLPostgreSQLConnection connection = TCLPostgreSQLConnection.GetInstance(connectionString);
-
-            //TCLPostgreSQLMapper mapper = TCLPostgreSQLMapper();
-
-            //foreach (DataRow dataRow in dataTable.Rows)
-            //{
-            //    list.Add(mapper.MapWithRelationship<T> (connection, dataRow));
-            //}
-
-            return list;
-        }
-
-        public List<T> ExecuteQueryWithOutRelationship<T>(string query) where T : new()
-        {
-            command.CommandText = query;
-
-            DataTable dataTable = new DataTable();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            adapter.Fill(dataTable);
-
-            List<T> list = new List<T>();
-            TCLPostgreSQLConnection connection = TCLPostgreSQLConnection.GetInstance(connectionString);
-
-            //TCLPostgreSQLMapper mapper = TCLPostgreSQLMapper();
-
-            //foreach (DataRow dataRow in dataTable.Rows)
-            //{
-            //    list.Add(mapper.MapWithoutRelationship<T> (connection, dataRow));
-            //}
-
-            return list;
-        }
-
-
-
-
-
-
     }
 }
