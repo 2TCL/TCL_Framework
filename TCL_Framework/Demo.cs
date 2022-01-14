@@ -20,7 +20,7 @@ public class Demo
             .Select<StudentGroup>()
             .AllRow()
             .GroupBy("class_id")
-            .Having(group => group.Count == 2)
+            .Having("count(*) <= 2")
             .Run();
         foreach (var student in students)
         {

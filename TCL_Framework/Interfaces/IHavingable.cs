@@ -4,9 +4,8 @@ using System.Linq.Expressions;
 
 namespace TCL_Framework.Interfaces
 {
-    public interface IHavingable<T> where T: new() 
+    public interface IHavingable<T> : IRunable<T> where T: new() 
     {
-        IRunable<T> Having(Expression<Func<T, bool>> expression);
-        List<T> Run();
+        IRunable<T> Having(string condition);
     }
 }

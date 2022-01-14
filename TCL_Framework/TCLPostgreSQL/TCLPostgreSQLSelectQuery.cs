@@ -38,9 +38,8 @@ namespace TCL_Framework.TCLPostgreSQL
             return this;
         }
 
-        public IRunable<T> Having(Expression<Func<T, bool>> expression)
+        public IRunable<T> Having(string condition)
         {
-            var condition = GetValueAsString(expression.Body);
             query = $"{query} HAVING {condition}";
             return this;
         }
