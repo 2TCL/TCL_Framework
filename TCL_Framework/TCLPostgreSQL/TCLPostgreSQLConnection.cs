@@ -8,22 +8,18 @@ namespace TCL_Framework.TCLPostgreSQL
     public class TCLPostgreSQLConnection : TCLConnection
     {
         private NpgsqlConnection _connection;
-        private static TCLPostgreSQLConnection instance;
+        private static TCLPostgreSQLConnection _instance;
 
         private TCLPostgreSQLConnection(string connectionString)
         {
-            base.connectionString = connectionString;
+            this.connectionString = connectionString;
             _connection = new NpgsqlConnection(connectionString);
-            this.Open();
+            // this.Open();
         }
 
         public static TCLPostgreSQLConnection GetInstance(string connectionString)
         {
-            if (instance == null)
-            {
-                instance = new TCLPostgreSQLConnection(connectionString);
-            }
-            return instance;
+            return _instance ?? (_instance = new TCLPostgreSQLConnection(connectionString));
         }
 
         public NpgsqlConnection GetConnection()
@@ -33,7 +29,7 @@ namespace TCL_Framework.TCLPostgreSQL
 
         public override void Open()
         {
-            if (_connection == null)
+            if (_connection.State != System.Data.ConnectionState.Open)
             {
                 _connection.Open();
             }
@@ -41,12 +37,8 @@ namespace TCL_Framework.TCLPostgreSQL
 
         public override void Close()
         {
-            if (_connection != null)
-            {
-                _connection.Close();
-                _connection = null;
-                instance = null;
-            }
+            if (_connection.State != System.Data.ConnectionState.Open) return;
+            _connection.Close();
         }
 
         public override IWherable<T> Select<T>()

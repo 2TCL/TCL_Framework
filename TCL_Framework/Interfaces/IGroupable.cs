@@ -1,7 +1,11 @@
-﻿namespace TCL_Framework.Interfaces
+﻿using System.Collections.Generic;
+
+namespace TCL_Framework.Interfaces
 {
     public interface IGroupable<T> where T: new()
     {
-        IRunable<T> GroupBy(string columnNames);
+        IHavingable<T> GroupBy(string columnNames);
+        
+        List<T> Run();
     }
 }

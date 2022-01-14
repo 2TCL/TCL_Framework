@@ -13,7 +13,7 @@ namespace TCL_Framework.TCLPostgreSQL
             string tableName = mapper.GetTableName<T>();
 
             List<PrimaryKeyAttribute> primaryKeys = mapper.GetPrimaryKeys<T>();
-            Dictionary<ColumnAttribute, object> columnsWithValues = mapper.GetColumnsWithValues<T>(obj);
+            Dictionary<ColumnAttribute, object> columnsWithValues = mapper.GetColumnsWithValues(obj);
 
             if (columnsWithValues != null && primaryKeys != null)
             {
@@ -52,7 +52,7 @@ namespace TCL_Framework.TCLPostgreSQL
                 if (!string.IsNullOrEmpty(where))
                 {
                     where = where.Substring(0, where.Length - 2);
-                    query = string.Format("UPDATE {0} SET {1} WHERE {2}", tableName, set, where);
+                    query = $"UPDATE {tableName} SET {set} WHERE {where}";
                 }
             }
         }

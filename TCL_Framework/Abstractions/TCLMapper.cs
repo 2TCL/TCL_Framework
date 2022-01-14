@@ -28,7 +28,9 @@ namespace TCL_Framework.Interfaces
                 if (columnMapping != null)
                 {
                     var mapsTo = columnMapping as ColumnAttribute;
-                    property.SetValue(obj, dr[mapsTo.Name]);
+                    string[] parts = mapsTo.Name.Split(' ');
+                    string lastWord = parts[parts.Length - 1];
+                    property.SetValue(obj, dr[lastWord]);
                 }
             }
 
@@ -122,10 +124,7 @@ namespace TCL_Framework.Interfaces
                 }
             }
 
-            if (columnAttributes.Count > 0)
-                return columnAttributes;
-            else
-                return null;
+            return columnAttributes.Count > 0 ? columnAttributes : null;
         }
 
         public Dictionary<ColumnAttribute, object> GetColumnsWithValues<T>(T obj)
@@ -144,10 +143,7 @@ namespace TCL_Framework.Interfaces
                 }
             }
 
-            if (listColumnValues.Count > 0)
-                return listColumnValues;
-            else
-                return null;
+            return listColumnValues.Count > 0 ? listColumnValues : null;
         }
 
         public ColumnAttribute GetColumn(string name, Dictionary<ColumnAttribute, object> listColumnValues)
@@ -194,11 +190,7 @@ namespace TCL_Framework.Interfaces
         {
             IEnumerator iter = source.GetEnumerator();
 
-            if (iter.MoveNext())
-            {
-                return iter.Current;
-            }
-            return null;
+            return iter.MoveNext() ? iter.Current : null;
         }
     }
 }

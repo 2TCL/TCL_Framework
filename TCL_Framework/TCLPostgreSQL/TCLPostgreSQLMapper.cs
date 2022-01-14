@@ -151,13 +151,13 @@ namespace TCL_Framework.TCLPostgreSQL
                             string query = string.Format("SELECT * FROM {0} WHERE {1}", tableName, whereStr);
 
                             cnn.Open();
-                            MethodInfo method = cnn.GetType().GetMethod("ExecuteQueryNoRelationship")
+                            MethodInfo execQueryNoRelationshipMethod = cnn.GetType().GetMethod("ExecuteQueryNoRelationship")
                             .MakeGenericMethod(new Type[] { type });
-                            var ienumerable = (IEnumerable)method.Invoke(cnn, new object[] { query });
+                            var ienumerable = (IEnumerable)execQueryNoRelationshipMethod.Invoke(cnn, new object[] { query });
                             cnn.Close();
 
-                            MethodInfo method2 = mapper.GetType().GetMethod("GetFirst");
-                            var firstElement = method2.Invoke(mapper, new object[] { ienumerable });
+                            MethodInfo getFirstMethod = mapper.GetType().GetMethod("GetFirst");
+                            var firstElement = getFirstMethod.Invoke(mapper, new object[] { ienumerable });
 
                             property.SetValue(obj, firstElement);
                         }
