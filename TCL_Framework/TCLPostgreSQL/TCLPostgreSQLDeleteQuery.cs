@@ -35,7 +35,7 @@ namespace TCL_Framework.TCLPostgreSQL
             if (!string.IsNullOrEmpty(where))
             {
                 where = where.Substring(0, where.Length - 2);
-                query = string.Format("DELETE {0} WHERE {1}", tableName, where);
+                query = $"DELETE FROM {tableName} WHERE {@where}";
             }
         }
     }
